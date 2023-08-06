@@ -15,9 +15,10 @@ class MyProductScreen extends StatefulWidget {
 class _MyProductScreenState extends State<MyProductScreen> {
   late GlobalUIViewModel _ui;
   late AuthViewModel _authViewModel;
+
   @override
   void initState() {
-    WidgetsBinding.instance.addPostFrameCallback((_) {
+    WidgetsBinding.instance!.addPostFrameCallback((_) {
       _ui = Provider.of<GlobalUIViewModel>(context, listen: false);
       _authViewModel = Provider.of<AuthViewModel>(context, listen: false);
       getInit();
@@ -47,7 +48,7 @@ class _MyProductScreenState extends State<MyProductScreen> {
           },
         ),
         appBar: AppBar(
-          backgroundColor: Colors.black54,
+          backgroundColor: Color(0xffff9800),
           title: Text("My Products"),
         ),
         body: RefreshIndicator(
@@ -56,8 +57,9 @@ class _MyProductScreenState extends State<MyProductScreen> {
             physics: AlwaysScrollableScrollPhysics(),
             child: Column(
               children: [
-                if (_authViewModel.myProduct != null && _authViewModel.myProduct!.isEmpty) Center(child: Text("You can add your products here")),
-                if (_authViewModel.myProduct != null) ...authVM.myProduct!.map((e) => ProductWidgetList(context, e))
+                if (_authViewModel.myProduct != null && _authViewModel.myProduct!.isEmpty)
+                  Center(child: Text("You can add your products here")),
+                if (_authViewModel.myProduct != null) ..._authViewModel.myProduct!.map((e) => ProductWidgetList(context, e))
               ],
             ),
           ),
@@ -77,31 +79,26 @@ class _MyProductScreenState extends State<MyProductScreen> {
           elevation: 5,
           child: ListTile(
             leading: ClipRRect(
-                borderRadius: BorderRadius.circular(5),
-                child: Image.network(
-                  e.imageUrl.toString(),
-                  height: 300,
-                  width: 100,
-                  fit: BoxFit.cover,
-                  errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
-                    return Image.asset(
-                      'assets/images/logo.png',
-                      height: 300,
-                      width: 100,
-                      fit: BoxFit.cover,
-                    );
-                  },
-                )),
+              borderRadius: BorderRadius.circular(5),
+              child: Image.network(
+                e.imageUrl.toString(),
+                height: 300,
+                width: 100,
+                fit: BoxFit.cover,
+                errorBuilder: (BuildContext context, Object exception, StackTrace? stackTrace) {
+                  return Image.asset(
+                    'assets/images/logo.png',
+                    height: 300,
+                    width: 100,
+                    fit: BoxFit.cover,
+                  );
+                },
+              ),
+            ),
             title: Text(e.productName.toString()),
             subtitle: Text(e.productPrice.toString()),
             trailing: Wrap(
               children: [
-                IconButton(
-                  onPressed: () {
-                    Navigator.of(context).pushNamed("/edit-product", arguments: e.id);
-                  },
-                  icon: Icon(Icons.edit),
-                ),
                 IconButton(
                   onPressed: () {
                     deleteProduct(e.id.toString());
@@ -116,8 +113,9 @@ class _MyProductScreenState extends State<MyProductScreen> {
     );
   }
 
-  Future<void> deleteProduct(String id) async{
-    var response = await showDialog(
+  Future<void> deleteProduct(String id) async {
+    try {
+      var response = await showDialog(
         context: context,
         builder: (context) {
           return AlertDialog(
@@ -125,27 +123,32 @@ class _MyProductScreenState extends State<MyProductScreen> {
             content: Text('Are you sure you want to delete this product?'),
             actions: <Widget>[
               TextButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  child: Text('Close')),
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: Text('Close'),
+              ),
               TextButton(
                 onPressed: () {
                   Navigator.pop(context);
                   deleteFunction(id);
                 },
                 child: Text('Delete'),
-              )
+              ),
             ],
           );
-        });
+        },
+      );
+    } catch (e) {
+      print(e);
+    }
   }
-  deleteFunction(String id) async{
 
+  Future<void> deleteFunction(String id) async {
     _ui.loadState(true);
-    try{
+    try {
       await _authViewModel.deleteMyProduct(id);
-    }catch(e){
+    } catch (e) {
       print(e);
     }
     _ui.loadState(false);
