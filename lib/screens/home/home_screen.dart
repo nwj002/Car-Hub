@@ -52,7 +52,7 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             Positioned.fill(
               child: Container(
-                margin: EdgeInsets.only(top: 60),
+                margin: EdgeInsets.only(top: 0),
                 child: RefreshIndicator(
                   onRefresh: refresh,
                   child: SingleChildScrollView(
@@ -61,13 +61,10 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
 
                         Image.asset(
-                          "assets/images/banner.jpg",
+                          "assets/images/carsb.jpg",
                           height: 200,
                           width: double.infinity,
                           fit: BoxFit.fill,
-                        ),
-                        SizedBox(
-                          height: 20,
                         ),
                         WelcomeText(authVM),
                         Container(
@@ -109,48 +106,11 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
             ),
-            HomeHeader(),
           ],
         ),
       );
     });
   }
-
-  Widget HomeHeader() {
-    return Align(
-        alignment: Alignment.topCenter,
-        child: Container(
-            width: double.infinity,
-            height: 60,
-            decoration: BoxDecoration(
-              border: Border.all(
-                color: Colors.black26,
-              ),
-              color: Colors.white,
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 2,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
-            ),
-            padding: EdgeInsets.all(15),
-            child: Row(
-              children: [
-                Expanded(child: Container()),
-                Expanded(child: Image.asset("assets/images/logo.png", height: 50, width: 50,)),
-                Expanded(
-                    child: Align(
-                      alignment: Alignment.centerRight,
-                        child: Container()
-                        // Icon(Icons.search, size: 30,)
-                    )),
-              ],
-            )));
-  }
-
   Widget WelcomeText(AuthViewModel authVM) {
     return Column(
       mainAxisAlignment: MainAxisAlignment.start,

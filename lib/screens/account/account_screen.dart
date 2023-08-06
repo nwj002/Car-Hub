@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:n_baz/services/local_notification_service.dart';
 import 'package:provider/provider.dart';
 
 import '../../viewmodels/auth_viewmodel.dart';
@@ -55,7 +56,7 @@ class _AccountScreenState extends State<AccountScreen> {
             height: 10,
           ),
           Container(
-            child: Text(_auth.loggedInUser!.name.toString()),
+            child: Text(_auth.loggedInUser!.email.toString()),
           ),
           SizedBox(
             height: 10,

@@ -51,7 +51,7 @@ class _CartScreenState extends State<CartScreen> {
     _ui.loadState(true);
     try {
       await _authViewModel.favoriteAction(isFavorite, productId);
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Favorite updated.")));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text("Add to Cart.")));
     } catch (e) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Something went wrong. Please try again.")));
@@ -63,158 +63,165 @@ class _CartScreenState extends State<CartScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthViewModel>(builder: (context, authVM, child) {
-      return Container(
+      return Scaffold( // Wrap with Scaffold
+          appBar: AppBar(
+          title: Text('My Cart'),
+      centerTitle: true,
+      backgroundColor: Color(0xffff9800),
+      ),
+      body: Container(
         child: RefreshIndicator(
           onRefresh: getInit,
           child: SingleChildScrollView(
             physics: AlwaysScrollableScrollPhysics(),
             child: items == null
                 ? Column(
-                    children: [
-                      Center(child: Text("Something went wrong")),
-                    ],
-                  )
+              children: [
+                Center(child: Text("Something went wrong")),
+              ],
+            )
                 : items.length == 0
-                    ? Column(
-                        children: [
-                          Center(child: Text("Please add to favorite")),
-                        ],
-                      )
-                    : Column(children: [
-                        SizedBox(
-                          height: 10,
-                        ),
-                        Container(
-                          margin: EdgeInsets.all(10),
-                          child: Builder(builder: (context) {
-                            int total = 0;
-                            num total_price = 0;
-                            items.forEach((element) {
-                              total += element.quantity;
-                              total_price += (element.product.productPrice ?? 0) * total;
+                ? Column(
+              children: [
+                Center(child: Text("Added to cart")),
+              ],
+            )
+                : Column(children: [
+              SizedBox(
+                height: 10,
+              ),
+              Container(
+                margin: EdgeInsets.all(10),
+                child: Builder(builder: (context) {
+                  int total = 0;
+                  num total_price = 0;
+                  items.forEach((element) {
+                    total += element.quantity;
+                    total_price += (element.product.productPrice ?? 0) * total;
+                  });
+                  return Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Container(
+                        child: Text("Total Items : ${total.toString()}"),
+                      ),
+                      Container(
+                        child: Text("Total Price : ${total_price.toString()}"),
+                      ),
+                    ],
+                  );
+                }),
+              ),
+              ...items.map(
+                    (e) => InkWell(
+                  onTap: () {
+                    Navigator.of(context)
+                        .pushNamed("/single-product", arguments: e.product.id!);
+                  },
+                  child: Container(
+                    margin: EdgeInsets.symmetric(horizontal: 10),
+                    child: Card(
+                      child: ListTile(
+                        trailing: IconButton(
+                          iconSize: 25,
+                          onPressed: () {
+                            CartRepository().removeItemFromCart(e.product).then((value) {
+                              ScaffoldMessenger.of(context)
+                                  .showSnackBar(SnackBar(content: Text("Cart updated")));
+                              getCartItems();
                             });
-                            return Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Container(
-                                  child: Text("Total Items : ${total.toString()}"),
-                                ),
-                                Container(
-                                  child: Text("Total Price : ${total_price.toString()}"),
-                                ),
-                              ],
-                            );
-                          }),
+                          },
+                          icon: Icon(
+                            Icons.delete_outlined,
+                            color: Colors.red,
+                          ),
                         ),
-                        ...items.map(
-                          (e) => InkWell(
-                            onTap: () {
-                              Navigator.of(context)
-                                  .pushNamed("/single-product", arguments: e.product.id!);
-                            },
-                            child: Container(
-                              margin: EdgeInsets.symmetric(horizontal: 10),
-                              child: Card(
-                                child: ListTile(
-                                  trailing: IconButton(
-                                    iconSize: 25,
-                                    onPressed: () {
-                                      CartRepository().removeItemFromCart(e.product).then((value) {
-                                        ScaffoldMessenger.of(context)
-                                            .showSnackBar(SnackBar(content: Text("Cart updated")));
-                                        getCartItems();
-                                      });
-                                    },
-                                    icon: Icon(
-                                      Icons.delete_outlined,
-                                      color: Colors.red,
+                        leading: ClipRRect(
+                            borderRadius: BorderRadius.circular(5),
+                            child: Image.network(
+                              e.product.imageUrl.toString(),
+                              width: 100,
+                              fit: BoxFit.cover,
+                              errorBuilder: (BuildContext context, Object exception,
+                                  StackTrace? stackTrace) {
+                                return Image.asset(
+                                  'assets/images/logo.png',
+                                  width: 100,
+                                  fit: BoxFit.cover,
+                                );
+                              },
+                            )),
+                        title: Text(e.product.productName.toString()),
+                        subtitle: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(e.product.productPrice.toString()),
+                            Row(
+                              children: [
+                                InkWell(
+                                  onTap: () {
+                                    CartRepository()
+                                        .removeFromCart(e.product)
+                                        .then((value) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Cart updated")));
+                                      getCartItems();
+                                    });
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFFE6F0F5),
+                                        borderRadius: BorderRadius.circular(50)),
+                                    padding: EdgeInsets.all(5),
+                                    child: Icon(
+                                      Icons.remove,
+                                      size: 15,
                                     ),
                                   ),
-                                  leading: ClipRRect(
-                                      borderRadius: BorderRadius.circular(5),
-                                      child: Image.network(
-                                        e.product.imageUrl.toString(),
-                                        width: 100,
-                                        fit: BoxFit.cover,
-                                        errorBuilder: (BuildContext context, Object exception,
-                                            StackTrace? stackTrace) {
-                                          return Image.asset(
-                                            'assets/images/logo.png',
-                                            width: 100,
-                                            fit: BoxFit.cover,
-                                          );
-                                        },
-                                      )),
-                                  title: Text(e.product.productName.toString()),
-                                  subtitle: Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Text(e.product.productPrice.toString()),
-                                      Row(
-                                        children: [
-                                          InkWell(
-                                            onTap: () {
-                                              CartRepository()
-                                                  .removeFromCart(e.product)
-                                                  .then((value) {
-                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(content: Text("Cart updated")));
-                                                getCartItems();
-                                              });
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  color: Color(0xFFE6F0F5),
-                                                  borderRadius: BorderRadius.circular(50)),
-                                              padding: EdgeInsets.all(5),
-                                              child: Icon(
-                                                Icons.remove,
-                                                size: 15,
-                                              ),
-                                            ),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          Container(
-                                            child: Text(e.quantity.toString()),
-                                          ),
-                                          SizedBox(
-                                            width: 10,
-                                          ),
-                                          InkWell(
-                                            onTap: () {
-                                              CartRepository()
-                                                  .addToCart(e.product, 1)
-                                                  .then((value) {
-                                                ScaffoldMessenger.of(context).showSnackBar(
-                                                    SnackBar(content: Text("Cart updated")));
-                                                getCartItems();
-                                              });
-                                            },
-                                            child: Container(
-                                              decoration: BoxDecoration(
-                                                  color: Color(0xFFE6F0F5),
-                                                  borderRadius: BorderRadius.circular(50)),
-                                              padding: EdgeInsets.all(5),
-                                              child: Icon(
-                                                Icons.add,
-                                                size: 15,
-                                              ),
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                    ],
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                Container(
+                                  child: Text(e.quantity.toString()),
+                                ),
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                InkWell(
+                                  onTap: () {
+                                    CartRepository()
+                                        .addToCart(e.product, 1)
+                                        .then((value) {
+                                      ScaffoldMessenger.of(context).showSnackBar(
+                                          SnackBar(content: Text("Cart updated")));
+                                      getCartItems();
+                                    });
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                        color: Color(0xFFE6F0F5),
+                                        borderRadius: BorderRadius.circular(50)),
+                                    padding: EdgeInsets.all(5),
+                                    child: Icon(
+                                      Icons.add,
+                                      size: 15,
+                                    ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
-                          ),
-                        )
-                      ]),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+              )
+            ]),
           ),
         ),
+      )
       );
     });
   }

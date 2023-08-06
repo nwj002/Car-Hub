@@ -51,7 +51,13 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<AuthViewModel>(builder: (context, authVM, child) {
-      return Container(
+      return Scaffold( // Wrap with Scaffold
+        appBar: AppBar(
+          title: Text('Favorite Products'),
+          centerTitle: true,
+          backgroundColor: Color(0xffff9800),
+        ),
+          body: Container(
         child: RefreshIndicator(
           onRefresh: getInit,
           child: SingleChildScrollView(
@@ -68,8 +74,9 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                     children: [
                       Center(child: Text("Please add to favorite")),
                     ],
-                  )
-                : Column(children: [
+                  ):
+
+                 Column(children: [
                   SizedBox(height: 10,),
                     ...authVM.favoriteProduct!.map(
                       (e) => InkWell(
@@ -96,7 +103,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                                     errorBuilder: (BuildContext context,
                                         Object exception, StackTrace? stackTrace) {
                                       return Image.asset(
-                                        'assets/images/logo.png',
+                                        'assets/images/banner.png',
                                         width: 100,
                                         fit: BoxFit.cover,
                                       );
@@ -112,6 +119,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
                   ]),
           ),
         ),
+      )
       );
     });
   }
