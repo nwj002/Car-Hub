@@ -117,6 +117,14 @@ class _AccountScreenState extends State<AccountScreen> {
             },
           ),
           makeSettings(
+            icon: Icon(Icons.sell),
+            title: "My Products",
+            subtitle: "Get a listing of my products",
+            onTap: () {
+              Navigator.of(context).pushNamed("/my-products");
+            },
+          ),
+          makeSettings(
             icon: Icon(Icons.logout),
             title: "Logout",
             subtitle: "Logout from this application",
