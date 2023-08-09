@@ -68,7 +68,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
                     child: Image(
                       image:
-                      const AssetImage("assets/images/logo.png",),
+                      const AssetImage("assets/images/carslogo.gif",),
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 0.6,
                       fit: BoxFit.contain,
@@ -78,7 +78,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     height: 10,
                   ),
                   const Text(
-                    "Welcome to Unjk App",
+                    "Welcome to Car-hub",
                     textAlign: TextAlign.center,
                     overflow: TextOverflow.clip,
                     style: TextStyle(
@@ -86,6 +86,17 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontStyle: FontStyle.normal,
                       fontSize: 24,
                       color: Color(0xff8bc34a),
+                    ),
+                  ),
+                  const Text(
+                    "A place to buy and sell cars",
+                    textAlign: TextAlign.center,
+                    overflow: TextOverflow.clip,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w400,
+                      fontStyle: FontStyle.normal,
+                      fontSize: 15,
+                      color: Color(0xffff9800),
                     ),
                   ),
                   // this is email section

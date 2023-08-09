@@ -46,6 +46,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
         body: Center(
           child: SingleChildScrollView(
             child: Container(
+              color: Colors.white,
               padding: const EdgeInsets.all(20),
               child: Column(
                 children: [
@@ -53,7 +54,7 @@ class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
                     child: Image(
                       image:
-                      const AssetImage("assets/images/logo.png",),
+                      const AssetImage("assets/images/forget.gif",),
                       height: MediaQuery.of(context).size.height * 0.25,
                       width: MediaQuery.of(context).size.width * 0.6,
                       fit: BoxFit.contain,

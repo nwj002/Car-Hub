@@ -65,7 +65,7 @@ class _CartScreenState extends State<CartScreen> {
     return Consumer<AuthViewModel>(builder: (context, authVM, child) {
       return Scaffold( // Wrap with Scaffold
           appBar: AppBar(
-          title: Text('My Cart'),
+          title: Text('My Car Cart'),
       centerTitle: true,
       backgroundColor: Color(0xffff9800),
       ),

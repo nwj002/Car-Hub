@@ -8,7 +8,6 @@ import '../../models/category_model.dart';
 import '../../models/product_model.dart';
 import '../../viewmodels/auth_viewmodel.dart';
 import '../../viewmodels/category_viewmodel.dart';
-import '../../viewmodels/global_ui_viewmodel.dart';
 import '../../viewmodels/product_viewmodel.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -61,9 +60,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       children: [
 
                         Image.asset(
-                          "assets/images/carsb.jpg",
-                          height: 200,
-                          width: double.infinity,
+                          "assets/images/banner.gif",
+                          // height: 200,
+                          // width: double.infinity,
                           fit: BoxFit.fill,
                         ),
                         WelcomeText(authVM),
@@ -83,7 +82,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Container(
                               margin: EdgeInsets.symmetric(horizontal: 10),
                             child: Text(
-                              "Products",
+                              "Cars",
                               style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
                             )),
                         Container(
@@ -117,17 +116,21 @@ class _HomeScreenState extends State<HomeScreen> {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              "Welcome,",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            )),
-        Container(
-            margin: EdgeInsets.symmetric(horizontal: 10),
-            child: Text(
-              authVM.loggedInUser != null ? authVM.loggedInUser!.name.toString() : "Guest",
-              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
-            )),
+          margin: EdgeInsets.symmetric(horizontal: 10),
+          child: RichText(
+            text: TextSpan(
+              style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold, color: Colors.black),
+              children: [
+                TextSpan(text: "Welcome "),
+                TextSpan(
+                  text: authVM.loggedInUser != null ? authVM.loggedInUser!.name.toString() : "Guest",
+                  style: TextStyle(color: Colors.black), // You can apply different styles here
+                ),
+              ],
+            ),
+          ),
+        )
+
       ],
     );
   }

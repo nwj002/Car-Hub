@@ -53,7 +53,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
     return Consumer<AuthViewModel>(builder: (context, authVM, child) {
       return Scaffold( // Wrap with Scaffold
         appBar: AppBar(
-          title: Text('Favorite Products'),
+          title: Text('Favorite Car'),
           centerTitle: true,
           backgroundColor: Color(0xffff9800),
         ),
@@ -72,7 +72,7 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
             authVM.favoriteProduct!.length == 0
                 ? Column(
                     children: [
-                      Center(child: Text("Please add to favorite")),
+                      Center(child: Text("Please add your favorite car")),
                     ],
                   ):
 

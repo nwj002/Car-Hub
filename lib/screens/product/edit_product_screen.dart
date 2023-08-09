@@ -159,7 +159,7 @@ class _EditProductBodyState extends State<EditProductBody> {
         return Scaffold(
           appBar: AppBar(
             backgroundColor: Colors.black54,
-            title: Text("Edit a product"),
+            title: Text("Edit a car"),
           ),
           body: Consumer<CategoryViewModel>(builder: (context, categoryVM, child) {
             return SafeArea(
@@ -181,8 +181,8 @@ class _EditProductBodyState extends State<EditProductBody> {
                           enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                           border: InputBorder.none,
-                          label: Text("Product Name"),
-                          hintText: 'Enter product name',
+                          label: Text("Model Name"),
+                          hintText: 'Enter model name',
                         ),
                       ),
                       SizedBox(
@@ -196,8 +196,8 @@ class _EditProductBodyState extends State<EditProductBody> {
                           enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                           border: InputBorder.none,
-                          label: Text("Product Price"),
-                          hintText: 'Enter product price',
+                          label: Text("Car Price"),
+                          hintText: 'Enter car price',
                         ),
                       ),
                       SizedBox(
@@ -212,8 +212,8 @@ class _EditProductBodyState extends State<EditProductBody> {
                           enabledBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                           focusedBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(20)),
                           border: InputBorder.none,
-                          label: Text("Product Description"),
-                          hintText: 'Enter product description',
+                          label: Text("Model Specification"),
+                          hintText: 'Enter model specification',
                         ),
                       ),
                       SizedBox(

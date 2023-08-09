@@ -79,16 +79,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
               padding: EdgeInsets.all(20),
               child: Column(
                 children: [
-                  // Padding(
-                  //   padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
-                  //   child: Image(
-                  //     image:
-                  //     const AssetImage("assets/images/logo.png",),
-                  //     height: MediaQuery.of(context).size.height * 0.15,
-                  //     width: MediaQuery.of(context).size.width * 0.6,
-                  //     fit: BoxFit.contain,
-                  //   ),
-                  // ),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, 25),
+                    child: Image(
+                      image:
+                      const AssetImage("assets/images/carslogo.gif",),
+                      height: MediaQuery.of(context).size.height * 0.15,
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      fit: BoxFit.contain,
+                    ),
+                  ),
                   const Padding(
                     padding: EdgeInsets.fromLTRB(0, 15, 0, 0),
                     child: Text(

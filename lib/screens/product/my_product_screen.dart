@@ -49,7 +49,7 @@ class _MyProductScreenState extends State<MyProductScreen> {
         ),
         appBar: AppBar(
           backgroundColor: Color(0xffff9800),
-          title: Text("My Products"),
+          title: Text("My Cars"),
         ),
         body: RefreshIndicator(
           onRefresh: getInit,
@@ -58,7 +58,7 @@ class _MyProductScreenState extends State<MyProductScreen> {
             child: Column(
               children: [
                 if (_authViewModel.myProduct != null && _authViewModel.myProduct!.isEmpty)
-                  Center(child: Text("You can add your products here")),
+                  Center(child: Text("You can sell your Cars here")),
                 if (_authViewModel.myProduct != null) ..._authViewModel.myProduct!.map((e) => ProductWidgetList(context, e))
               ],
             ),
@@ -119,7 +119,7 @@ class _MyProductScreenState extends State<MyProductScreen> {
         context: context,
         builder: (context) {
           return AlertDialog(
-            title: Text('Delete product?'),
+            title: Text('Remove car?'),
             content: Text('Are you sure you want to delete this product?'),
             actions: <Widget>[
               TextButton(

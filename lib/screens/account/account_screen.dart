@@ -92,7 +92,7 @@ class _AccountScreenState extends State<AccountScreen> {
     return SingleChildScrollView(
       child: Column(
         children: [
-          SizedBox(height: 10),
+          SizedBox(height: 50),
           GestureDetector(
             onTap: _selectImage,
             child: CircleAvatar(
@@ -110,11 +110,11 @@ class _AccountScreenState extends State<AccountScreen> {
           Container(
             child: Text(_auth.loggedInUser!.email.toString()),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 50),
           makeSettings(
-            icon: Icon(Icons.sell),
-            title: "My Products",
-            subtitle: "Get a listing of my products",
+            icon: Icon(Icons.car_crash_rounded),
+            title: "My Cars",
+            subtitle: "Selling Cars",
             onTap: () {
               Navigator.of(context).pushNamed("/my-products");
             },
@@ -122,7 +122,7 @@ class _AccountScreenState extends State<AccountScreen> {
           makeSettings(
             icon: Icon(Icons.logout),
             title: "Logout",
-            subtitle: "Logout from this application",
+            subtitle: "Logout from car-hub",
             onTap: () {
               logout();
             },
