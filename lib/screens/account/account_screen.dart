@@ -105,17 +105,12 @@ class _AccountScreenState extends State<AccountScreen> {
           ),
           SizedBox(height: 10),
           Container(
+            child: Text(_auth.loggedInUser!.username.toString()),
+          ),
+          Container(
             child: Text(_auth.loggedInUser!.email.toString()),
           ),
           SizedBox(height: 10),
-          makeSettings(
-            icon: Icon(Icons.sell),
-            title: "My Products",
-            subtitle: "Get a listing of my products",
-            onTap: () {
-              Navigator.of(context).pushNamed("/my-products");
-            },
-          ),
           makeSettings(
             icon: Icon(Icons.sell),
             title: "My Products",

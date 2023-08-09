@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:n_baz/models/product_model.dart';
-import 'package:n_baz/repositories/product_repositories.dart';
-import 'package:n_baz/services/file_upload.dart';
-import 'package:n_baz/viewmodels/category_viewmodel.dart';
 import 'package:provider/provider.dart';
 
+import '../../models/product_model.dart';
+import '../../services/file_upload.dart';
 import '../../viewmodels/auth_viewmodel.dart';
+import '../../viewmodels/category_viewmodel.dart';
 import '../../viewmodels/global_ui_viewmodel.dart';
 
 class AddProductScreen extends StatefulWidget {
@@ -114,8 +113,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.black54,
-        title: Text("Add a product"),
+        backgroundColor: Color(0xffff9800),
+        title: Text("Cars"),
       ),
       body: Consumer<CategoryViewModel>(
           builder: (context, categoryVM, child) {
@@ -142,8 +141,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             borderRadius: BorderRadius.circular(20)
                         ),
                         border: InputBorder.none,
-                        label: Text("Product Name"),
-                        hintText: 'Enter product name',
+                        label: Text("Model Name"),
+                        hintText: 'Enter Model name',
                       ),
                     ),
                     SizedBox(height: 10,),
@@ -159,8 +158,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             borderRadius: BorderRadius.circular(20)
                         ),
                         border: InputBorder.none,
-                        label: Text("Product Price"),
-                        hintText: 'Enter product price',
+                        label: Text("Price"),
+                        hintText: 'Enter price',
                       ),
                     ),
                     SizedBox(height: 10,),
@@ -177,8 +176,8 @@ class _AddProductScreenState extends State<AddProductScreen> {
                             borderRadius: BorderRadius.circular(20)
                         ),
                         border: InputBorder.none,
-                        label: Text("Product Description"),
-                        hintText: 'Enter product description',
+                        label: Text("Specification"),
+                        hintText: 'Enter model Specification',
                       ),
                     ),
                     SizedBox(height: 15,),

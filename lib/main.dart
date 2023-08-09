@@ -1,25 +1,23 @@
+import 'package:Car_hub/screens/auth/forget_password_screen.dart';
+import 'package:Car_hub/screens/auth/login_screen.dart';
+import 'package:Car_hub/screens/auth/register_screen.dart';
+import 'package:Car_hub/screens/category/single_category_screen.dart';
+import 'package:Car_hub/screens/dashboard/dashboard.dart';
+import 'package:Car_hub/screens/product/add_product_screen.dart';
+import 'package:Car_hub/screens/product/edit_product_screen.dart';
+import 'package:Car_hub/screens/product/my_product_screen.dart';
+import 'package:Car_hub/screens/product/single_product_screen.dart';
+import 'package:Car_hub/screens/splash_screen.dart';
+import 'package:Car_hub/viewmodels/auth_viewmodel.dart';
+import 'package:Car_hub/viewmodels/category_viewmodel.dart';
+import 'package:Car_hub/viewmodels/global_ui_viewmodel.dart';
+import 'package:Car_hub/viewmodels/product_viewmodel.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:loader_overlay/loader_overlay.dart';
-import 'package:n_baz/screens/auth/forget_password_screen.dart';
-import 'package:n_baz/screens/auth/login_screen.dart';
-import 'package:n_baz/screens/auth/register_screen.dart';
-import 'package:n_baz/screens/category/single_category_screen.dart';
-import 'package:n_baz/screens/dashboard/dashboard.dart';
-import 'package:n_baz/screens/product/add_product_screen.dart';
-import 'package:n_baz/screens/product/edit_product_screen.dart';
-import 'package:n_baz/screens/product/my_product_screen.dart';
-import 'package:n_baz/screens/product/single_product_screen.dart';
-import 'package:n_baz/screens/splash_screen.dart';
-import 'package:n_baz/services/local_notification_service.dart';
-import 'package:n_baz/viewmodels/auth_viewmodel.dart';
-import 'package:n_baz/viewmodels/category_viewmodel.dart';
-import 'package:n_baz/viewmodels/global_ui_viewmodel.dart';
-import 'package:n_baz/viewmodels/product_viewmodel.dart';
 import 'package:provider/provider.dart';
 
-import 'firebase_options.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
